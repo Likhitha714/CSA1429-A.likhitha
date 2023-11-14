@@ -1,19 +1,31 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+int tempCount = 1;
+
+char generateTemp() {
+    return 'T' + tempCount++;
+}
+
+void genThreeAddressCode(char op, char arg1, char arg2, char result) {
+    printf("%c := %c %c %c\n", result, arg1, op, arg2);
+}
 
 int main() {
-    int a, b, c, d, result;
+    char expr[100];
+    printf("Enter an arithmetic expression: ");
+    scanf("%s", expr);
 
-    // Read input values
-    printf("Enter values for a and b: ");
-    scanf("%d %d", &a, &b);
+    char result = generateTemp();
 
-    // Perform operations
-    c = a + b;
-    d = a - b;
-    result = c * d;
+    // Assuming the input expression is a simple binary expression
+    // For simplicity, not handling errors or complex expressions
 
-    // Display result
-    printf("Result: %d\n", result);
+    genThreeAddressCode(expr[1], expr[0], expr[2], result);
+
+    printf("Three-Address Code:\n");
+    printf("%s\n", expr);
+    printf("%c := %c %c %c\n", result, expr[0], expr[1], expr[2]);
 
     return 0;
 }
